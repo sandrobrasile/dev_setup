@@ -32,7 +32,6 @@ then
     git config --global core.editor "emacs"
 fi
 
-install Gnu Global
 read -p "Do you want to install Gnu Global? (y, n) " -n 1 -r
 echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -63,3 +62,21 @@ fi
 #     sudo cmake .. && sudo make && sudo make install
 #     echo 'rtags installed'
 # fi
+
+read -p "Do you want to install C++ stdlib man pages? (y, n) " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+   echo 'Installing C++ stdlib man pages...'
+   mkdir stdman && cd stdman
+   git clone https://github.com/jeaye/stdman.git .
+   sudo ./configure
+   sudo make install
+   cd .. && sudo rm -R --force stdman
+   sudo mandb
+   echo 'C++ stdlib man pages installed'
+fi
+
+
+
+
